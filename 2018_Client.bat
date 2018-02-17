@@ -55,7 +55,7 @@ echo Downloading GlassWire
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.glasswire.com/GlassWireSetup.exe','C:\Fileshare\GlassWireSetup.exe')"
 echo Downloading Kiwi Syslog Agent
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://downloads.solarwinds.com/solarwinds/Release/Kiwi/Syslog/Kiwi-Syslog-Server-9.6.3-Freeware.zip','C:\Fileshare\KiwiSyslogServer.zip')"
-powershell -command "(new-object System.Net.WebClient).DownloadFile('http://downloads.solarwinds.com/solarwinds/Release/Kiwi/LogForwarder/SolarWinds-LogForwarder-v1.1.19.zip','C:\Fileshare\KiwiSyslogForawrder.zip')
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://downloads.solarwinds.com/solarwinds/Release/Kiwi/LogForwarder/SolarWinds-LogForwarder-v1.1.19.zip','C:\Fileshare\KiwiSyslogForwarder.zip')
 echo Downloading Wireshark
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://1.na.dl.wireshark.org/win64/Wireshark-win64-2.4.4.exe','C:\Fileshare\Wireshark.exe')"
 echo Downloading Security Essentials
@@ -107,14 +107,30 @@ echo.
 echo.
 color 0B
 echo Installing Chrome
-C:\Fileshare\ChromeInstaller.exe
+C:\Fileshare\ChromeInstaller.exe /silent /install
 echo Installing SysInternals Suite
+if not exist "C:\Fileshare\Sysinternals_Suite\" mkdir "C:\Fileshare\Sysinternals_Suite"
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\SysinternalsSuite.zip').Items(),16)"
 echo Installing CCleaner
+C:\Fileshare\CCleanerSetup.exe /silent /install
 echo Installing MalwareBytes
+C:\Fileshare\MalwareBytesInstaller.exe /silent /install
 echo Installing GlassWire
+C:\Fileshare\GlassWireSetup.exe /silent /install
 echo Installing Kiwi Syslog
+if not exist "C:\Fileshare\Kiwi_Syslog\" mkdir "C:\Fileshare\Kiwi_Syslog"
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\KiwiSyslogServer.zip').Items(),16)"
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\KiwiSyslogForwarder.zip').Items(),16)"
 echo Installing Wireshark
+C:\Fileshare\Wireshark.exe /silent /install
 echo Installing Security Essentials
+C:\Fileshare\MSEInstall.exe /silent /install
+echo Installing Splunk
+C:\Fileshare\SplunkInstall.msi /silent /install
+echo Installing NMAP
+C:\Fileshare\NMAP-Setup.exe /silent /install
+echo Installing Security Task Manager
+C:\Fileshare\SecurityTaskManager_Setup.exe /silent /install
 echo.
 echo.
 echo.
