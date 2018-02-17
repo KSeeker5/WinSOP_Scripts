@@ -9,7 +9,7 @@ echo.
 echo.
 echo.
 echo Input 1 - if you are on Windows XP/2003
-echo Input 2 - if you are on Windows Vista/7/2008
+echo Input 2 - if you are on Windows Vista/7/2008/2008R2/2012
 echo Input 3 - if you need both sets of security patches
 echo Input 4 - if you don't need security patches
 set /p Patch=""
@@ -19,18 +19,24 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/F/5/7/F572FDA0-1082-43BF-9927-D89CD78C0DA4/WindowsServer2003-KB2592799-x86-ENU.exe','C:\Fileshare\MS11-080_2003.exe')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/0/B/5/0B5C6A96-39FA-4A64-819D-30F1674395F4/WindowsServer2003-KB2989935-x86-ENU.exe','C:\Fileshare\MS14-070_2003.exe')"
 ) else if %Patch%==2 (
-echo "Opening Download Pages -MS09-050 & MS16-032-"
+echo "Opening Download Pages -MS09-050, MS16-032, & MS17-010-"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/D/E/6/DE69BD2A-6C70-4716-BD73-E933CC884F23/Windows6.0-KB975517-x64.msu','C:\Fileshare\MS09-050_2008.msu')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/F/2/D/F2D919E1-2E08-4ACF-AEDB-575AD146750E/Windows6.1-KB3139914-x64.msu','C:\Fileshare\MS16-032_2008R2.msu')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/2/B/4/2B4810AE-7F93-49C6-BED7-4AD293AA0F7F/Windows6.1-KB3139914-x86.msu','C:\Fileshare\MS16-032_Win7.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/d/msdownload/update/software/secu/2017/02/windows6.1-kb4012212-x86_6bb04d3971bb58ae4bac44219e7169812914df3f.msu','C:\Fileshare\MS17-010_Win7.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/d/msdownload/update/software/secu/2017/02/windows6.1-kb4012212-x64_2decefaa02e2058dcd965702509a992d8c4e92b3.msu','C:\Fileshare\MS17-010_2008R2.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/c/msdownload/update/software/secu/2017/02/windows8-rt-kb4012214-x64_b14951d29cb4fd880948f5204d54721e64c9942b.msu','C:\Fileshare\MS17-010_2012.msu')"
 ) else if %Patch%==3 (
-echo "Opening Download Pages -MS08-067, MS11-080, MS14-070, MS09-050, & MS16-032-"
+echo "Opening Download Pages -MS08-067, MS11-080, MS14-070, MS09-050, MS16-032, & MS17-010-"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/e/e/3/ee322649-7f38-4553-a26b-a2ac40a0b205/WindowsServer2003-KB958644-x86-ENU.exe','C:\Fileshare\MS08-067_2003.exe')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/F/5/7/F572FDA0-1082-43BF-9927-D89CD78C0DA4/WindowsServer2003-KB2592799-x86-ENU.exe','C:\Fileshare\MS11-080_2003.exe')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/0/B/5/0B5C6A96-39FA-4A64-819D-30F1674395F4/WindowsServer2003-KB2989935-x86-ENU.exe','C:\Fileshare\MS14-070_2003.exe')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/D/E/6/DE69BD2A-6C70-4716-BD73-E933CC884F23/Windows6.0-KB975517-x64.msu','C:\Fileshare\MS09-050_2008.msu')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/F/2/D/F2D919E1-2E08-4ACF-AEDB-575AD146750E/Windows6.1-KB3139914-x64.msu','C:\Fileshare\MS16-032_2008R2.msu')"
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/2/B/4/2B4810AE-7F93-49C6-BED7-4AD293AA0F7F/Windows6.1-KB3139914-x86.msu','C:\Fileshare\MS16-032_Win7.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/d/msdownload/update/software/secu/2017/02/windows6.1-kb4012212-x86_6bb04d3971bb58ae4bac44219e7169812914df3f.msu','C:\Fileshare\MS17-010_Win7.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/d/msdownload/update/software/secu/2017/02/windows6.1-kb4012212-x64_2decefaa02e2058dcd965702509a992d8c4e92b3.msu','C:\Fileshare\MS17-010_2008R2.msu')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/c/msdownload/update/software/secu/2017/02/windows8-rt-kb4012214-x64_b14951d29cb4fd880948f5204d54721e64c9942b.msu','C:\Fileshare\MS17-010_2012.msu')"
 ) else (echo "No patches installed")
 echo.
 echo.
