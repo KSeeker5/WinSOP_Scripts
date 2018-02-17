@@ -97,8 +97,9 @@ echo.
 echo.
 color 0B
 echo Installing Chrome
-C:\Fileshare\ChromeInstaller.exe
+C:\Fileshare\ChromeInstaller.exe /silent /install
 echo Installing SysInternals Suite
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\SysinternalsSuite.zip').Items(),16)"
 echo Installing CCleaner
 echo Installing MalwareBytes
 echo Installing GlassWire
