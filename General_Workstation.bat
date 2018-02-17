@@ -105,11 +105,15 @@ echo Installing SysInternals Suite
 if not exist "C:\Fileshare\Sysinternals_Suite\" mkdir "C:\Fileshare\Sysinternals_Suite"
 powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\SysinternalsSuite.zip').Items(),16)"
 echo Installing CCleaner
+C:\Fileshare\CCleanerSetup.exe /silent /install
 echo Installing MalwareBytes
 echo Installing GlassWire
 echo Installing Kiwi Syslog
 echo Installing Wireshark
 echo Installing Security Essentials
+echo Installing Splunk
+echo Installing NMAP
+echo Installing Security Task Manager
 echo.
 echo.
 echo.
