@@ -155,9 +155,13 @@ echo @echo off > C:\Enable_File_Sharing.bat
 echo netsh advfirewall firewall set rule group="File and Printer Sharing new enable=Yes" >> C:\Enable_File_Sharing.bat
 echo exit >> C:\Enable_File_Sharing.bat
 ::Share File Script
-echo "" > C:\Share_File.bat
+echo @echo off > C:\Share_File.bat
+echo net share Fileshare$=C:\Fileshare /grant:everyone,read >> C:\Share_File.bat
+echo exit >> C:\Share_File.bat
 ::Stop Sharing File Script
-echo "" > C:\Stop_Sharing_File.bat
+echo @echo off > C:\Stop_Sharing_File.bat
+echo net share Fileshare$ /delete >> C:\Stop_Sharing_File.bat
+echo exit >> C:\Stop_Sharing_File.bat
 echo Opening Task Manager To Inspect Processes & Services
 start taskmgr
 pause
