@@ -124,9 +124,9 @@ powershell -command "(new-object -com shell.application).namespace('C:\Fileshare
 echo Installing Wireshark
 C:\Fileshare\Wireshark.exe /silent /install
 echo Installing Security Essentials
-C:\Fileshare\MSEInstall.exe /silent /install
-echo Installing Splunk
-C:\Fileshare\SplunkInstall.msi /silent /install
+C:\Fileshare\MSEInstall.exe
+::echo Installing Splunk*
+::C:\Fileshare\SplunkInstall.msi /passive
 echo Installing NMAP
 C:\Fileshare\NMAP-Setup.exe /silent /install
 echo Installing Security Task Manager
