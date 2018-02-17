@@ -107,13 +107,23 @@ powershell -command "(new-object -com shell.application).namespace('C:\Fileshare
 echo Installing CCleaner
 C:\Fileshare\CCleanerSetup.exe /silent /install
 echo Installing MalwareBytes
+C:\Fileshare\MalwareBytesInstaller.exe /silent /install
 echo Installing GlassWire
+C:\Fileshare\GlassWireSetup.exe /silent /install
 echo Installing Kiwi Syslog
+if not exist "C:\Fileshare\Kiwi_Syslog\" mkdir "C:\Fileshare\Kiwi_Syslog"
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\KiwiSyslogServer.zip').Items(),16)"
+powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\KiwiSyslogForwarder.zip').Items(),16)"
 echo Installing Wireshark
+C:\Fileshare\Wireshark.exe /silent /install
 echo Installing Security Essentials
+C:\Fileshare\MSEInstall.exe /silent /install
 echo Installing Splunk
+C:\Fileshare\SplunkInstall.msi /silent /install
 echo Installing NMAP
+C:\Fileshare\NMAP-Setup.exe /silent /install
 echo Installing Security Task Manager
+C:\Fileshare\SecurityTaskManager_Setup.exe /silent /install
 echo.
 echo.
 echo.
