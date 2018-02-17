@@ -55,7 +55,7 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 echo Downloading Splunk
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.splunk.com/products/splunk/releases/6.4.2/windows/splunk-6.4.2-00f5bb3fa822-x64-release.msi','C:\Fileshare\SplunkInstall.msi')"
 echo Downloading NMAP
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://nmap.org/dist/nmap-7.60-setup.exe','NMAP-Setup.exe')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://nmap.org/dist/nmap-7.60-setup.exe','C:\Fileshare\NMAP-Setup.exe')"
 echo Opening Nessus Download Page
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://www.tenable.com/downloads/nessus'); $IE.visible=$true"
 echo.
@@ -99,6 +99,7 @@ color 0B
 echo Installing Chrome
 C:\Fileshare\ChromeInstaller.exe /silent /install
 echo Installing SysInternals Suite
+if not exist "C:\Fileshare\Sysinternals_Suite\" mkdir "C:\Fileshare\Sysinternals_Suite"
 powershell -command "(new-object -com shell.application).namespace('C:\Fileshare\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\Fileshare\SysinternalsSuite.zip').Items(),16)"
 echo Installing CCleaner
 echo Installing MalwareBytes
