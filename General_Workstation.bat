@@ -47,7 +47,7 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 echo Downloading Kiwi Syslog Agent
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://downloads.solarwinds.com/solarwinds/Release/Kiwi/Syslog/Kiwi-Syslog-Server-9.6.3-Freeware.zip','%Desktop%\KiwiSyslog.zip')"
 echo Downloading Wireshark
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://2.na.dl.wireshark.org/win32/WiresharkPortable_2.4.4.paf.exe','%Desktop%\Wireshark.exe')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://1.na.dl.wireshark.org/win64/Wireshark-win64-2.4.4.exe','%Desktop%\Wireshark.exe')"
 echo Downloading Security Essentials
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/A/3/8/A38FFBF2-1122-48B4-AF60-E44F6DC28BD8/ENUS/amd64/MSEInstall.exe','%Desktop%\MSEInstall.exe')"
 echo Downloading Splunk
