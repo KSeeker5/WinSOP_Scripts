@@ -57,6 +57,8 @@ echo Downloading Splunk
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.splunk.com/products/splunk/releases/6.4.2/windows/splunk-6.4.2-00f5bb3fa822-x64-release.msi','C:\Fileshare\SplunkInstall.msi')"
 echo Downloading NMAP
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://nmap.org/dist/nmap-7.60-setup.exe','C:\Fileshare\NMAP-Setup.exe')"
+echo Downloading Security Task manager
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://www.neuber.com/download/SecurityTaskManager_Setup.exe','C:\Fileshare\SecurityTaskManager_Setup.exe')"
 echo Opening Nessus Download Page
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://www.tenable.com/downloads/nessus'); $IE.visible=$true"
 echo.
