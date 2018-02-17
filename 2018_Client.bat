@@ -68,9 +68,9 @@ echo Downloading NMAP
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://nmap.org/dist/nmap-7.60-setup.exe','C:\Fileshare\NMAP-Setup.exe')"
 echo Downloading Security Task manager
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://www.neuber.com/download/SecurityTaskManager_Setup.exe','C:\Fileshare\SecurityTaskManager_Setup.exe')"
-echo Downloading Nessus
-::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://www.tenable.com/downloads/nessus'); $IE.visible=$true"
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://tenable-downloads-production.s3.amazonaws.com/uploads/download/file/7561/Nessus-7.0.2-x64.msi','C:\Fileshare\Nessus_Install.msi')"
+::echo Downloading Nessus
+::   powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://www.tenable.com/downloads/nessus'); $IE.visible=$true"
+::powershell -command "(new-object System.Net.WebClient).DownloadFile('https://tenable-downloads-production.s3.amazonaws.com/uploads/download/file/7561/Nessus-7.0.2-x64.msi','C:\Fileshare\Nessus_Install.msi')"
 echo.
 echo.
 echo.
@@ -134,8 +134,8 @@ echo Installing NMAP
 C:\Fileshare\NMAP-Setup.exe /silent /install
 echo Installing Security Task Manager
 C:\Fileshare\SecurityTaskManager_Setup.exe /silent /install
-echo Installing Nessus
-C:\Fileshare\Nessus_Install.msi /passive
+::echo Installing Nessus
+::C:\Fileshare\Nessus_Install.msi /passive
 echo.
 echo.
 echo.
