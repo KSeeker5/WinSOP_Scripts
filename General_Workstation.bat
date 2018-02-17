@@ -14,20 +14,20 @@ echo Input 4 - if you don't need security patches
 set /p Patch=""
 if %Patch%==1 (
 echo "Opening Download Pages -MS08-067, MS11-080, & MS14-070-"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2011/ms11-080'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-070'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2011/ms11-080'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-070'); $IE.visible=$true"
 ) else if %Patch%==2 (
 echo "Opening Download Pages -MS09-050 & MS16-032-"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2009/ms09-050'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2009/ms09-050'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032'); $IE.visible=$true"
 ) else if %Patch%==3 (
 echo "Opening Download Pages -MS08-067, MS11-080, MS14-070, MS09-050, & MS16-032-"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2011/ms11-080'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-070'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2009/ms09-050'); $IE.visible=$true"
-powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2011/ms11-080'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-070'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2009/ms09-050'); $IE.visible=$true"
+::powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032'); $IE.visible=$true"
 ) else (echo "No patches installed")
 echo.
 echo.
