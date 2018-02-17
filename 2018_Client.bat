@@ -1,8 +1,10 @@
 @echo off
 color 0A
 if not exist "C:\Fileshare\" mkdir "C:\Fileshare"
+hostname
+hostname > C:\IP-MAC.txt
 ipconfig /all | findstr IPv4
-ipconfig /all | findstr IPv4 > C:\IP-MAC.txt
+ipconfig /all | findstr IPv4 >> C:\IP-MAC.txt
 ipconfig /all | findstr Physical
 ipconfig /all | findstr Physical >> C:\IP-MAC.txt
 echo.
@@ -143,6 +145,19 @@ echo.
 echo.
 echo Changing Color For Visibility
 color 0A
+echo Creating Firewall Port Scripts and File Sharing Scripts
+::Block File Sharing Script
+echo "@echo off" > C:\Block_File_Sharing.bat
+echo "netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=No" >> C:\Block_File_Sharing.bat
+echo "exit" >> C:\Block_File_Sharing.bat
+::Enable File Sharing Script
+echo "@echo off" > C:\Enable_File_Sharing.bat
+echo "netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes" >> C:\Enable_File_Sharing.bat
+echo "exit" >> C:\Enable_File_Sharing.bat
+::Share File Script
+echo "" > C:\Share_File.bat
+::Stop Sharing File Script
+echo "" > C:\Stop_Sharing_File.bat
 echo Opening Task Manager To Inspect Processes & Services
 start taskmgr
 pause
