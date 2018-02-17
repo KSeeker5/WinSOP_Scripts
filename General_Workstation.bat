@@ -9,7 +9,7 @@ echo.
 echo.
 echo.
 echo Input 1 - if you are on Windows XP/2003
-echo Input 2 - if you are on Windows Vista/7/2008
+echo Input 2 - if you are on Windows Vista/7/2008/2008R2/2012
 echo Input 3 - if you need both sets of security patches
 echo Input 4 - if you don't need security patches
 set /p Patch=""
@@ -19,9 +19,10 @@ powershell -command "$IE=(new-object -com internetexplorer.application); $IE.nav
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2011/ms11-080'); $IE.visible=$true"
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-070'); $IE.visible=$true"
 ) else if %Patch%==2 (
-echo "Opening Download Pages -MS09-050 & MS16-032-"
+echo "Opening Download Pages -MS09-050, MS16-032, & MS17-010-"
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2009/ms09-050'); $IE.visible=$true"
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2016/ms16-032'); $IE.visible=$true"
+powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2017/ms17-010'); $IE.visible=$true"
 ) else if %Patch%==3 (
 echo "Opening Download Pages -MS08-067, MS11-080, MS14-070, MS09-050, & MS16-032-"
 powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://docs.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067'); $IE.visible=$true"
