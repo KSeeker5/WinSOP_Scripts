@@ -45,7 +45,8 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 echo Downloading GlassWire
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.glasswire.com/GlassWireSetup.exe','%Desktop%\GlassWireSetup.exe')"
 echo Downloading Kiwi Syslog Agent
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://downloads.solarwinds.com/solarwinds/Release/Kiwi/Syslog/Kiwi-Syslog-Server-9.6.3-Freeware.zip','%Desktop%\KiwiSyslog.zip')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://downloads.solarwinds.com/solarwinds/Release/Kiwi/Syslog/Kiwi-Syslog-Server-9.6.3-Freeware.zip','%Desktop%\KiwiSyslogServer.zip')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://downloads.solarwinds.com/solarwinds/Release/Kiwi/LogForwarder/SolarWinds-LogForwarder-v1.1.19.zip','%Desktop%\KiwiSyslogForawrder.zip')
 echo Downloading Wireshark
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://1.na.dl.wireshark.org/win64/Wireshark-win64-2.4.4.exe','%Desktop%\Wireshark.exe')"
 echo Downloading Security Essentials
