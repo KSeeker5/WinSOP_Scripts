@@ -104,7 +104,7 @@ echo Installing Wireshark
 C:\Fileshare\Wireshark.exe /silent /install
 echo Installing Security Essentials
 C:\Fileshare\MSEInstall.exe
-::echo Installing Splunk*
+::echo Installing Splunk
 ::C:\Fileshare\SplunkInstall.msi /passive
 echo Installing NMAP
 C:\Fileshare\NMAP-Setup.exe /silent /install
@@ -145,4 +145,10 @@ echo netsh advfirewall firewall set rule group="File and Printer Sharing" new en
 echo exit >> C:\Stop_Sharing_File.bat
 echo Opening Task Manager To Inspect Processes & Services
 start taskmgr
+echo.
+echo.
+echo.
+echo ****************************************
+echo Security Got! Your System is Now Secure!
+echo ****************************************
 pause
