@@ -52,9 +52,9 @@ echo.
 echo.
 color 0D
 echo Changing Administrator Password
-net user Administrator P@ssw0rd
+net user Administrator M1k3H@y$4ev3r
 echo Adding "Admin" Account
-net user Admin r3dT3@m1sB4d /ADD
+net user Admin M1k3H@y$4ev3r /ADD
 echo Disabling New Admin Account
 net user Admin /active:no
 echo.
