@@ -160,9 +160,9 @@ echo exit >> C:\Enable_ICMP.bat
 echo Opening Task Manager To Inspect Processes & Services
 start taskmgr
 echo Blocking All Inbound Ports
-C:\Block_All_Ports.bat
+start cmd /k "C:\Block_All_Ports.bat"
 echo Enabling ICMP
-C:\Enable_ICMP.bat
+start cmd /k "C:\Enable_ICMP.bat"
 echo.
 echo.
 echo.
