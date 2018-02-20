@@ -154,8 +154,8 @@ echo netsh advfirewall firewall add rule name="ICMP Allow incoming V6 echo reque
 echo exit >> C:\Enable_ICMP.bat
 ::Disable ICMP Script
 echo @echo off > C:\Disable_ICMP.bat
-echo netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=allow >> C:\Disable_ICMP.bat
-echo netsh advfirewall firewall add rule name="ICMP Allow incoming V6 echo request" protocol=icmpv6:8,any dir=in action=allow >> C:\Disable_ICMP.bat
+echo netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=block >> C:\Disable_ICMP.bat
+echo netsh advfirewall firewall add rule name="ICMP Allow incoming V6 echo request" protocol=icmpv6:8,any dir=in action=block >> C:\Disable_ICMP.bat
 echo exit >> C:\Disable_ICMP.bat
 echo Opening Task Manager To Inspect Processes & Services
 start taskmgr
