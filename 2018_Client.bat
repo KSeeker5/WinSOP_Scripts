@@ -145,8 +145,8 @@ echo netsh advfirewall firewall set rule group="File and Printer Sharing" new en
 echo exit >> C:\Stop_Sharing_File.bat
 ::Block All Incoming Ports Script
 echo @echo off > C:\Block_All_Ports.bat
-echo netsh advfirewall set currentprofile firewallpolicy blockinbound,allowoutbound > C:\Block_All_Ports.bat
-echo exit > C:\Block_All_Ports.bat
+echo netsh advfirewall set currentprofile firewallpolicy blockinbound,allowoutbound >> C:\Block_All_Ports.bat
+echo exit >> C:\Block_All_Ports.bat
 ::Enable ICMP Script
 echo @echo off > C:\Enable_ICMP.bat
 echo netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=allow >> C:\Enable_ICMP.bat
