@@ -23,7 +23,7 @@ echo.
 :: SYNTAX:
 :: powershell -command "(new-object System.Net.WebClient).DownloadFile('link','C:\DownloadedFiles\Windows_Patches\MSPatchName.extension')"
 :: -----2008R2 First-----
-echo Downloading patches for 2008 R2 (MS16-032 & MS17-010)
+echo Downloading patches for 2008 R2 (MS16-032 ^& MS17-010)
 :: MS16-032
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/F/2/D/F2D919E1-2E08-4ACF-AEDB-575AD146750E/Windows6.1-KB3139914-x64.msu','C:\DownloadedFiles\Windows_Patches\MS16-032_2008R2.msu')"
 :: ----------TINYURL: https://tinyurl.com/ms16-032-08r2
@@ -31,7 +31,7 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/d/msdownload/update/software/secu/2017/02/windows6.1-kb4012212-x64_2decefaa02e2058dcd965702509a992d8c4e92b3.msu','C:\DownloadedFiles\Windows_Patches\MS17-010_2008R2.msu')"
 :: ----------TINYURL: https://tinyurl.com/ms17-010-08r2
 :: -----2012 Next-----
-echo Downloading patches for 2012 (MS16-032 & MS17-010)
+echo Downloading patches for 2012 (MS16-032 ^& MS17-010)
 :: MS16-032
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/0/C/9/0C99ACB1-DCE3-4B5F-BBFC-D40D51889A49/Windows8-RT-KB3139914-x64.msu','C:\DownloadedFiles\Windows_Patches\MS16-032_2012.msu')"
 :: ----------TINYURL: https://tinyurl.com/ms16-032-2012
@@ -39,7 +39,7 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 powershell -command "(new-object System.Net.WebClient).DownloadFile('http://download.windowsupdate.com/c/msdownload/update/software/secu/2017/02/windows8-rt-kb4012214-x64_b14951d29cb4fd880948f5204d54721e64c9942b.msu','C:\DownloadedFiles\Windows_Patches\MS17-010_2012.msu')"
 :: ----------TINYURL: https://tinyurl.com/ms17-010-2012
 :: -----8.1 Last-----
-echo Downloading patches for Windows 8.1 (MS16-032 & MS17-010)
+echo Downloading patches for Windows 8.1 (MS16-032 ^& MS17-010)
 :: MS16-032
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/B/D/3/BD3A7357-E60C-498C-BC60-A07C18E9E8F8/Windows8.1-KB3139914-x64.msu','C:\DownloadedFiles\Windows_Patches\MS16-032_8.1.msu')"
 :: ----------TINYURL: https://tinyurl.com/ms16-032-8-1
@@ -94,6 +94,9 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://www
 ::   powershell -command "$IE=(new-object -com internetexplorer.application); $IE.navigate2('https://www.tenable.com/downloads/nessus'); $IE.visible=$true"
 ::powershell -command "(new-object System.Net.WebClient).DownloadFile('https://tenable-downloads-production.s3.amazonaws.com/uploads/download/file/7561/Nessus-7.0.2-x64.msi','C:\DownloadedFiles\ProgramInstallers\Nessus_Install.msi')"
 :: ----------TINYURL: https://tinyurl.com/yaxc4wsy
+echo Downloading Visual Studio C++ 2008 SP1 Redistributable Package
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.microsoft.com/download/2/d/6/2d61c766-107b-409d-8fba-c39e61ca08e8/vcredist_x64.exe','C:\DownloadedFiles\ProgramInstallers\vcredist_x64.exe')"
+:: ----------TINYURL: https://tinyurl.com/yay28mdv
 echo.
 echo.
 echo.
