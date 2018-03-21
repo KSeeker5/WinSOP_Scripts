@@ -107,12 +107,37 @@ color 0D
 echo Changing Administrator Password
 net user Administrator PressingButton$2
 echo Adding "Admin" Account
-net user Admin M1k3H@y$4ev3r /ADD
+net user Admin D03sntM@tt3rWh@tTh1s1sB3caus3The@cc0unt1sD3d /ADD
 echo Disabling New Admin Account
 net user Admin /active:no
 echo.
 echo.
 echo.
+
+:: Deactivate Guest account, if it is active
+
+net user Guest | findstr Active | findstr Yes
+if %errorlevel%==0 echo Guest account is active, deactivating
+if %errorlevel%==1 echo Guest account is not active
+net user Guest /active:NO
+
+:: Change all account passwords to #1 in password list
+net users > C:\UserList.txt
+(
+  for /F %%h in (UserList.txt) do (
+    echo %%h | findstr NEXS
+    if %errorlevel%==1 net user %%h PressingButton$2 >> C:\UserList.txt 
+  )
+)
+
+:: Creating Password Policy
+net accounts /FORCELOGOFF:30 /MINPWLEN:8 /MAXPWAGE:30 /MINPWAGE:10 /UNIQUEPW:3
+echo Password policy:
+echo Force log off after 30 minutes > C:\Password_Policy.txt
+echo Minimum password length of 8 characters > C:\Password_Policy.txt
+echo Maximum password age of 30 > C:\Password_Policy.txt
+echo Minimum password age of 10 > C:\Password_Policy.txt
+echo Unique password threshold set to 3 (default is 5) > C:\Password_Policy.txt
 
 :: Disabling File Sharing & Administrative Shares
 
@@ -154,11 +179,105 @@ echo.
 echo.
 echo.
 
-:: Disabling All Firewall Rules
+:: Exporting Current Firewall rules before changes are made
 
-netsh advfirewall set currentprofile firewallpolicy blockinbound,blockoutbound
+if not exist "C:\DownloadedFiles\FirewallRules\" mkdir "C:\DownloadedFiles\FirewallRules"
+netsh advfirewall export "C:\DownloadedFiles\FirewallRules\ORIGINAL_RULES.wfw"
+:: Export a backup copy of the firewall rules (just in case)
+if not exist "C:\Backups\Firewall_Rules\" mkdir "C:\Backups\Firewall_Rules"
+netsh advfirewall export "C:\Backups\Firewall_Rules\ORIGINAL_RULES.wfw"
 
-::Enable ICMP
+:: Disabling All Firewall Rules Not Explicitly Stated
 
-netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=allow
-netsh advfirewall firewall add rule name="ICMP Allow incoming V6 echo request" protocol=icmpv6:8,any dir=in action=allow
+echo Disabling all non-explicit firewall rules
+netsh advfirewall set domain firewallpolicy blockinbound,blockoutbound
+netsh advfirewall set private firewallpolicy blockinbound,blockoutbound
+netsh advfirewall set public firewallpolicy blockinbound,blockoutbound
+
+:: Deleting all explicitly stated firewall rules
+
+echo Deleting all explicit firewall rules
+powershell -command "Remove-NetFirewallRule -All"
+
+:: Create ICMP and DNS inbound rules
+
+echo Creating ICMP ^& DNS inbound rules
+netsh advfirewall firewall add rule name="A" service=any protocol=ICMPv4:8,any dir=in action=allow
+netsh advfirewall firewall add rule name="Allow DNS.exe to DNS the things" program="%SystemRoot%\System32\dns.exe" dir=in action=allow protocol=UDP localport=53
+
+:: Create Active Directory Domain rules
+
+echo Creating Active Directory Domain rules
+netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=389
+netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=389
+netsh advfirewall firewall add rule name="Active Directory Domain Controller - Secure LDAP (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=636
+
+:: Create DNS outbound rules
+
+echo Creating DNS outbound rules
+netsh advfirewall firewall add rule name="Allow DNS" program="%SystemRoot%\System32\dns.exe" dir=out action=allow protocol=UDP remoteport=53
+
+:: Create NTP inbound rules
+
+netsh advfirewall firewall add rule name="Allow NTP to do the timey-wimey" program="%SystemRoot%\System32\w32tm.exe" service=any dir=in action=allow protocol=UDP localport=123
+
+:: Create NTP outbound rules
+
+netsh advfirewall firewall add rule name="Allow NTP" program="%SystemRoot%\System32\w32tm.exe" service=any dir=out action=allow protocol=UDP localport=123
+
+:: ------------------------Rules go here
+
+:: ----------Display Scheduled Tasks Script
+echo @echo off > C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
+echo color 0D >> C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
+echo echo Displaying Scheduled Tasks >> C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
+echo schtasks /Query >> C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
+echo schtasks /Query ^> C:\ScheduledTasks.txt >> C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
+
+:: ----------Install Programs Script
+echo @echo off > C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo color 0B >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing Chrome >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing SysInternals Suite >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo if not exist "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite\" mkdir "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo powershell -command "(new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\SysinternalsSuite.zip').Items(),16)" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing CCleaner >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\CCleanerSetup.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing MalwareBytes >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\MalwareBytesInstaller.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing GlassWire >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\GlassWireSetup.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing Kiwi Syslog >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo if not exist "C:\DownloadedFiles\ProgramInstallers\Kiwi_Syslog\" mkdir "C:\DownloadedFiles\ProgramInstallers\Kiwi_Syslog" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo powershell -command "(new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\KiwiSyslogServer.zip').Items(),16)" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo powershell -command "(new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\Kiwi_Syslog').CopyHere((new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\KiwiSyslogForwarder.zip').Items(),16)" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing Wireshark >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\Wireshark.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing Security Essentials >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\MSEInstall.exe >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo ::echo Installing Splunk >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo ::C:\DownloadedFiles\ProgramInstallers\SplunkInstall.msi /passive >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing NMAP >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\NMAP-Setup.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo echo Installing Security Task Manager >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\SecurityTaskManager_Setup.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo ::echo Installing Nessus >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo ::C:\DownloadedFiles\ProgramInstallers\Nessus_Install.msi /passive >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+
+:: Start task manager to inspect processes and services
+
+echo Opening Task Manager to inspect Processes ^& Services
+start taskmgr
+echo.
+echo.
+echo.
+
+:: Ending Text (Just for fun)
+
+echo ****************************************
+echo Security Got! Your System is Now Secure!
+echo ****************************************
+echo.
+pause
+::End
