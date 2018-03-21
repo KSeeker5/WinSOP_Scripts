@@ -134,10 +134,10 @@ net users > C:\UserList.txt
 net accounts /FORCELOGOFF:30 /MINPWLEN:8 /MAXPWAGE:30 /MINPWAGE:10 /UNIQUEPW:3
 echo Password policy:
 echo Force log off after 30 minutes > C:\Password_Policy.txt
-echo Minimum password length of 8 characters > C:\Password_Policy.txt
-echo Maximum password age of 30 > C:\Password_Policy.txt
-echo Minimum password age of 10 > C:\Password_Policy.txt
-echo Unique password threshold set to 3 (default is 5) > C:\Password_Policy.txt
+echo Minimum password length of 8 characters >> C:\Password_Policy.txt
+echo Maximum password age of 30 >> C:\Password_Policy.txt
+echo Minimum password age of 10 >> C:\Password_Policy.txt
+echo Unique password threshold set to 3 (default is 5) >> C:\Password_Policy.txt
 
 :: Disabling File Sharing & Administrative Shares
 
@@ -272,6 +272,19 @@ start taskmgr
 echo.
 echo.
 echo.
+
+:: Reminder to run the installer script generated for programs
+echo Would you like to install the programs downloaded? (Y/N)
+set /p Answer=""
+if %Answer%==y (
+	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
+)
+else if %Answer%==Y (
+	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
+)
+else (
+	echo Remember to install the programs using C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+)
 
 :: Ending Text (Just for fun)
 
