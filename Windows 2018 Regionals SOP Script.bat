@@ -266,6 +266,10 @@ echo echo Installing Security Task Manager >> C:\DownloadedFiles\Additional_Scri
 echo C:\DownloadedFiles\ProgramInstallers\SecurityTaskManager_Setup.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo ::echo Installing Nessus >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo ::C:\DownloadedFiles\ProgramInstallers\Nessus_Install.msi /passive >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo netsh advfirewall set domain firewallpolicy blockinbound,blockoutbound >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo netsh advfirewall set private firewallpolicy blockinbound,blockoutbound >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo netsh advfirewall set public firewallpolicy blockinbound,blockoutbound >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo exit >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 
 :: Start task manager to inspect processes and services
 
