@@ -240,7 +240,7 @@ echo schtasks /Query ^> C:\ScheduledTasks.txt >> C:\DownloadedFiles\Additional_S
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo color 0B >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo echo Installing Chrome >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
-echo C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.msi /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.msi /passive >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo echo Installing SysInternals Suite >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo if not exist "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite\" mkdir "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo powershell -command "(new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\SysinternalsSuite.zip').Items(),16)" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
@@ -280,16 +280,9 @@ echo Would you like to install the programs downloaded? (Y/N)
 set /p Answer=""
 if %Answer%==y (
 	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
-)
-else (
-	if %Answer%==Y (
-		start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
-	)
-	else (
-		:: Do nothing
-	)
-)
-else (
+) else if %Answer%==Y (
+	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
+) else (
 	echo Remember to install the programs using C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 )
 
