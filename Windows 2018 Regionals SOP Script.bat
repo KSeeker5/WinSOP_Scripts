@@ -56,7 +56,7 @@ color 0B
 echo Downloading Chrome
 ::powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B9D1B64B7-DF02-0224-9135-13DEB803C07A%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
 REM ----------TINYURL: https://tinyurl.com/ycwuvgl9
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BCE9DD555-BBEF-CB10-711F-553A11E1C2D2%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/edgedl/chrome/install/GoogleChromeStandaloneEnterprise64.msi','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.msi')"
 :: ----------TINYURL: https://tinyurl.com/y92mczpv
 echo Downloading SysInternals Suite
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.sysinternals.com/files/SysinternalsSuite.zip','C:\DownloadedFiles\ProgramInstallers\SysinternalsSuite.zip')"
@@ -240,7 +240,7 @@ echo schtasks /Query ^> C:\ScheduledTasks.txt >> C:\DownloadedFiles\Additional_S
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo color 0B >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo echo Installing Chrome >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
-echo C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
+echo C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.msi /silent /install >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo echo Installing SysInternals Suite >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo if not exist "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite\" mkdir "C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 echo powershell -command "(new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\Sysinternals_Suite').CopyHere((new-object -com shell.application).namespace('C:\DownloadedFiles\ProgramInstallers\SysinternalsSuite.zip').Items(),16)" >> C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
