@@ -56,7 +56,7 @@ color 0B
 echo Downloading Chrome
 ::powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B9D1B64B7-DF02-0224-9135-13DEB803C07A%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
 REM ----------TINYURL: https://tinyurl.com/ycwuvgl9
-powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B1C053769-8AD4-0551-2365-16753020C14B%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dtrue%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
+powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BCE9DD555-BBEF-CB10-711F-553A11E1C2D2%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
 :: ----------TINYURL: https://tinyurl.com/y92mczpv
 echo Downloading SysInternals Suite
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://download.sysinternals.com/files/SysinternalsSuite.zip','C:\DownloadedFiles\ProgramInstallers\SysinternalsSuite.zip')"
@@ -281,8 +281,13 @@ set /p Answer=""
 if %Answer%==y (
 	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
 )
-else if %Answer%==Y (
-	start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
+else (
+	if %Answer%==Y (
+		start cmd /k "C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat"
+	)
+	else (
+		:: Do nothing
+	)
 )
 else (
 	echo Remember to install the programs using C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
