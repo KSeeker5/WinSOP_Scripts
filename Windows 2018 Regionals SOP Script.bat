@@ -20,6 +20,11 @@ echo.
 
 :: Download Security Patches for Windows 2008R2, 2012, and 8.1
 
+:: --------------------TinyURL Links (General Download Pages)--------------------
+:: MS09-050: https://tinyurl.com/ybvndlf5
+:: MS16-032: https://tinyurl.com/y7tawrxe
+:: MS17-010: https://tinyurl.com/ycpsfv3l
+
 :: SYNTAX:
 :: powershell -command "(new-object System.Net.WebClient).DownloadFile('link','C:\DownloadedFiles\Windows_Patches\MSPatchName.extension')"
 :: -----2008R2 First-----
@@ -102,12 +107,17 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dow
 echo Downloading Firefox Portable
 powershell -command "(new-object System.Net.WebClient).DownloadFile('https://phoenixnap.dl.sourceforge.net/project/portableapps/Mozilla%20Firefox%2C%20Portable%20Ed./Mozilla%20Firefox%2C%20Portable%20Edition%2059.0.1/FirefoxPortable_59.0.1_English.paf.exe','C:\DownloadedFiles\ProgramInstallers\FirefoxPortable.exe')"
 :: ----------TINYURL: https://tinyurl.com/yct7upnp
+echo Downloading CURL
+powershell -command "(new-object System.Net.WebClient).DownloadFile('http://www.paehl.com/open_source/?download=curl_758_0_ssl.zip','C:\DownloadedFiles\ProgramInstallers\CURL.zip')"
+:: ----------TINYURL: https://tinyurl.com/ydcrnysf
+echo Downloading PuTTY
+powershell -command "(new-object System.Net.Webclient).DownloadFile('https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.70-installer.msi','C:\DownloadedFiles\ProgramInstallers\PuTTY_Install.msi')"
+:: ----------TINYURL: https://tinyurl.com/ybwqsgca
 echo.
 echo.
 echo.
 
 :: Changing Admin Password and creating 'dummy' Admin account (and disabling it)
-
 color 0D
 echo Changing Administrator Password
 net user Administrator PressingButton$2
@@ -232,6 +242,8 @@ netsh advfirewall firewall add rule name="Allow NTP" program="%SystemRoot%\Syste
 
 :: ------------------------Rules go here
 
+:: --------------------------------------------------Script Generation (replace all '%' with '%%' to write them to file)
+
 :: ----------Display Scheduled Tasks Script
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
 echo color 0D >> C:\DownloadedFiles\Additional_Scripts\Display_Scheduled_Tasks.bat
@@ -314,15 +326,15 @@ echo echo Creating NTP rules >> C:\DownloadedFiles\Additional_Scripts\Create_Ins
 echo netsh advfirewall firewall add rule name="Allow NTP to do the timey-wimey" program="%SystemRoot%\System32\w32tm.exe" service=any dir=in action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo netsh advfirewall firewall add rule name="Allow NTP" program="%SystemRoot%\System32\w32tm.exe" service=any dir=out action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 
-:: Splunk-Specific Firewall Rules
+:: Splunk-Specific Firewall Rules (NOPE)
 
-echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_Splunk_Rules.bat
+::echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_Splunk_Rules.bat
 :: ----------Inbound Rules
 :: Kerberos Rules
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88
 
 :: Active Directory-Specific Firewall Rules
 
@@ -351,24 +363,31 @@ echo exit >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.ba
 :: Windows 8.1-Specific Firewall Rules
 
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-:: ----------Inbound Rules
-:: Kerberos Rules
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88
-netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88
-::hi
+echo :: ----------Inbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=in action=allow protocol=TCP localport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=UDP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo :: Kerberos Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo :: ----------Outbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=out action=allow protocol=TCP localport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=UDP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo exit >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 
 :: Reset All User Passwords to a Specified Password Script
 
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo color 0D >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo All Account Password Reset Tool Version 13.37 >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo set %p Password="New Password: " >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo set /p Password="New Password: " >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Changing Administrator Password >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Administrator %Password% >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Adding "Admin" Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo net user Admin D03sntM@tt3rWh@tTh1s1sB3caus3The@cc0unt1sD3d /ADD >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo net user Admin %Password% /ADD >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Disabling New Admin Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Admin /active:no >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
