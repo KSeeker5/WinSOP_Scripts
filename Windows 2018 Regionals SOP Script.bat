@@ -120,11 +120,12 @@ echo.
 :: Changing Admin Password and creating 'dummy' Admin account (and disabling it)
 color 0D
 echo Changing Administrator Password
-net user Administrator PressingButton$2
+net user Administrator D03sntM@tt3rWh@tTh1s1sB3caus3The@cc0unt1sD3d
 echo Adding "Admin" Account
-net user Admin D03sntM@tt3rWh@tTh1s1sB3caus3The@cc0unt1sD3d /ADD
-echo Disabling New Admin Account
-net user Admin /active:no
+net user Admin PressingButton$2 /ADD
+echo Disabling Administrator Account
+net user Administrator /active:no
+net localgroup administrators Admin /add
 echo.
 echo.
 echo.
@@ -217,7 +218,7 @@ powershell -command "Remove-NetFirewallRule -All"
 :: Create ICMP and DNS inbound rules
 
 echo Creating ICMP ^& DNS inbound rules
-netsh advfirewall firewall add rule name="A" service=any protocol=ICMPv4:8,any dir=in action=allow
+netsh advfirewall firewall add rule name="Allow Bare Minimum ICMP" service=any protocol=ICMPv4:8,any dir=in action=allow
 netsh advfirewall firewall add rule name="Allow DNS.exe to DNS the things" program="%SystemRoot%\System32\dns.exe" dir=in action=allow protocol=UDP localport=53
 
 :: Create Active Directory Domain rules
@@ -292,7 +293,7 @@ echo @echo off > C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
 echo if not exist "C:\DownloadedFiles\FirewallRules\" mkdir "C:\DownloadedFiles\FirewallRules" >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
 echo netsh advfirewall export "C:\DownloadedFiles\FirewallRules\Firewall_Restore_Point.wfw" >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
 echo powershell -command "Remove-NetFirewallRule -All" >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
-echo netsh advfirewall firewall add rule name="A" service=any protocol=ICMPv4:8,any dir=in action=allow >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow Bare Minimum ICMP" service=any protocol=ICMPv4:8,any dir=in action=allow >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
 echo exit >> C:\DownloadedFiles\Additional_Scripts\Close_Firewall.bat
 
 :: Restore Firewall from blocked state
@@ -314,7 +315,7 @@ echo netsh advfirewall set public firewallpolicy blockinbound,blockoutbound >> C
 echo echo Deleting all explicit firewall rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo powershell -command "Remove-NetFirewallRule -All" >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating ICMP ^& DNS inbound rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="A" service=any protocol=ICMPv4:8,any dir=in action=allow >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow Bare Minimum ICMP" service=any protocol=ICMPv4:8,any dir=in action=allow >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo netsh advfirewall firewall add rule name="Allow DNS.exe to DNS the things" program="%%SystemRoot%%\System32\dns.exe" dir=in action=allow protocol=UDP localport=53 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating Active Directory Domain rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=389 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
@@ -364,7 +365,7 @@ echo exit >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.ba
 
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo :: ----------Inbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=in action=allow protocol=TCP localport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=in action=allow protocol=TCP remoteport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=UDP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo :: Kerberos Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
@@ -373,9 +374,9 @@ echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center 
 echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo :: ----------Outbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=out action=allow protocol=TCP localport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=UDP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=out action=allow protocol=TCP remoteport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=TCP remoteport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=UDP remoteport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo exit >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 
 :: Reset All User Passwords to a Specified Password Script
@@ -389,7 +390,8 @@ echo net user Administrator %%Password%% >> C:\DownloadedFiles\Additional_Script
 echo echo Adding "Admin" Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Admin %%Password%% /ADD >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Disabling New Admin Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo net user Admin /active:no >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo net user Administrator /active:no >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo net localgroup administrators Admin /add >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
@@ -426,6 +428,8 @@ if %Answer%==y (
 ) else (
 	echo Remember to install the programs using C:\DownloadedFiles\Additional_Scripts\Install_Programs.bat
 )
+
+netsh advfirewall set allprofiles state on
 
 :: Ending Text (Just for fun)
 
