@@ -58,6 +58,9 @@ echo.
 :: Downloading Necessary Programs
 
 color 0B
+echo Downloading PuTTY
+powershell -command "(new-object System.Net.Webclient).DownloadFile('https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.70-installer.msi','C:\DownloadedFiles\ProgramInstallers\PuTTY_Install.msi')"
+:: ----------TINYURL: https://tinyurl.com/ybwqsgca
 echo Downloading Chrome
 ::powershell -command "(new-object System.Net.WebClient).DownloadFile('https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B9D1B64B7-DF02-0224-9135-13DEB803C07A%7D%26lang%3Den%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/chrome/install/ChromeStandaloneSetup64.exe','C:\DownloadedFiles\ProgramInstallers\ChromeInstaller.exe')"
 REM ----------TINYURL: https://tinyurl.com/ycwuvgl9
@@ -110,9 +113,6 @@ powershell -command "(new-object System.Net.WebClient).DownloadFile('https://pho
 echo Downloading CURL
 powershell -command "(new-object System.Net.WebClient).DownloadFile('http://www.paehl.com/open_source/?download=curl_758_0_ssl.zip','C:\DownloadedFiles\ProgramInstallers\CURL.zip')"
 :: ----------TINYURL: https://tinyurl.com/ydcrnysf
-echo Downloading PuTTY
-powershell -command "(new-object System.Net.Webclient).DownloadFile('https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.70-installer.msi','C:\DownloadedFiles\ProgramInstallers\PuTTY_Install.msi')"
-:: ----------TINYURL: https://tinyurl.com/ybwqsgca
 echo.
 echo.
 echo.
@@ -315,49 +315,49 @@ echo echo Deleting all explicit firewall rules >> C:\DownloadedFiles\Additional_
 echo powershell -command "Remove-NetFirewallRule -All" >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating ICMP ^& DNS inbound rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo netsh advfirewall firewall add rule name="A" service=any protocol=ICMPv4:8,any dir=in action=allow >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Allow DNS.exe to DNS the things" program="%SystemRoot%\System32\dns.exe" dir=in action=allow protocol=UDP localport=53 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow DNS.exe to DNS the things" program="%%SystemRoot%%\System32\dns.exe" dir=in action=allow protocol=UDP localport=53 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating Active Directory Domain rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=389 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=389 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - Secure LDAP (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=636 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=389 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - LDAP (UDP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=389 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Active Directory Domain Controller - Secure LDAP (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=636 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating DNS outbound rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Allow DNS" program="%SystemRoot%\System32\dns.exe" dir=out action=allow protocol=UDP remoteport=53 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow DNS" program="%%SystemRoot%%\System32\dns.exe" dir=out action=allow protocol=UDP remoteport=53 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 echo echo Creating NTP rules >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Allow NTP to do the timey-wimey" program="%SystemRoot%\System32\w32tm.exe" service=any dir=in action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
-echo netsh advfirewall firewall add rule name="Allow NTP" program="%SystemRoot%\System32\w32tm.exe" service=any dir=out action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow NTP to do the timey-wimey" program="%%SystemRoot%%\System32\w32tm.exe" service=any dir=in action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
+echo netsh advfirewall firewall add rule name="Allow NTP" program="%%SystemRoot%%\System32\w32tm.exe" service=any dir=out action=allow protocol=UDP localport=123 >> C:\DownloadedFiles\Additional_Scripts\Create_Insane_Firewall.bat
 
 :: Splunk-Specific Firewall Rules (NOPE)
 
 ::echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_Splunk_Rules.bat
 :: ----------Inbound Rules
 :: Kerberos Rules
-::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464
-::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464
-::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88
-::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88
+::netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88
 
 :: Active Directory-Specific Firewall Rules
 
 echo @echo off > C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo :: ----------Inbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Allow Dynamic RPC Ports For Active Directory" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=RPC >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Allow Dynamic RPC Ports For Active Directory" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=RPC >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow NetLogon" service=netlogon dir=in action=allow protocol=TCP localport=445 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow RPC Endpoint Mapper" service="RpcEptMapper" dir=in action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo :: Kerberos Rules >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo :: Windows Management Instrumentation Rules >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (ASync-In)" program="%SystemRoot%\system32\wbem\unsecapp.exe" dir=in action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (DCOM-In)" program="%SystemRoot%\system32\svchost.exe" service="RpcSs" dir=in action=allow protocol=TCP localport=135 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (WMI-In)" program="%SystemRoot%\system32\svchost.exe" service="Winmgmt" dir=in action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (ASync-In)" program="%%SystemRoot%%\system32\wbem\unsecapp.exe" dir=in action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (DCOM-In)" program="%%SystemRoot%%\system32\svchost.exe" service="RpcSs" dir=in action=allow protocol=TCP localport=135 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (WMI-In)" program="%%SystemRoot%%\system32\svchost.exe" service="Winmgmt" dir=in action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo :: ----------Outbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow RPC Endpoint Mapper" service="RpcEptMapper" dir=out action=allow >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="AllowKerberosFinal" program="%SystemRoot%\System32\lsass.exe" dir=out action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Active Directory Domain Controller (TCP-Out)" program="%SystemRoot%\System32\lsass.exe" dir=out action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Active Directory Domain Controller (UDP-Out)" program="%SystemRoot%\System32\lsass.exe" dir=out action=allow protocol=UDP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
-echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (WMI-Out)" program="%SystemRoot%\System32\svchost.exe" service="Winmgmt" dir=out action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="AllowKerberosFinal" program="%%SystemRoot%%\System32\lsass.exe" dir=out action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Active Directory Domain Controller (TCP-Out)" program="%%SystemRoot%%\System32\lsass.exe" dir=out action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Active Directory Domain Controller (UDP-Out)" program="%%SystemRoot%%\System32\lsass.exe" dir=out action=allow protocol=UDP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
+echo netsh advfirewall firewall add rule name="Windows Management Instrumentation (WMI-Out)" program="%%SystemRoot%%\System32\svchost.exe" service="Winmgmt" dir=out action=allow protocol=TCP >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 echo exit >> C:\DownloadedFiles\Additional_Scripts\Add_Active_Directory_Rules.bat
 
 :: Windows 8.1-Specific Firewall Rules
@@ -368,10 +368,10 @@ echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" progra
 echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (UDP-In)" program="C:\Program Files\PuTTY\putty.exe" dir=in action=allow protocol=UDP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo :: Kerberos Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
-echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%SystemRoot%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center - PCR (UDP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=464 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=TCP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
+echo netsh advfirewall firewall add rule name="Kerberos Key Distribution Center (TCP-In)" program="%%SystemRoot%%\System32\lsass.exe" dir=in action=allow protocol=UDP localport=88 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo :: ----------Outbound Rules >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow HTTPS-In for Chrome" program="C:\Program Files(x86)\Google\Chrome\Application\Chrome.exe" dir=out action=allow protocol=TCP localport=443 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
 echo netsh advfirewall firewall add rule name="Allow SSH for PuTTY (TCP-Out)" program="C:\Program Files\PuTTY\putty.exe" dir=out action=allow protocol=TCP localport=22 >> C:\DownloadedFiles\Additional_Scripts\Add_8.1_Rules.bat
@@ -385,9 +385,9 @@ echo color 0D >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo All Account Password Reset Tool Version 13.37 >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo set /p Password="New Password: " >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Changing Administrator Password >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo net user Administrator %Password% >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo net user Administrator %%Password%% >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Adding "Admin" Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo net user Admin %Password% /ADD >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo net user Admin %%Password%% /ADD >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo Disabling New Admin Account >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Admin /active:no >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
@@ -395,15 +395,15 @@ echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo echo. >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo :: Deactivate Guest account, if it is active >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Guest | findstr Active | findstr Yes >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo if %errorlevel%==0 echo Guest account is active, deactivating >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo if %errorlevel%==1 echo Guest account is not active >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo if %%errorlevel%%==0 echo Guest account is active, deactivating >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo if %%errorlevel%%==1 echo Guest account is not active >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net user Guest /active:NO >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo :: Change all account passwords to password specified >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo net users ^> C:\UserList.txt >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo ( >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo   for /F %%h in (UserList.txt) do ( >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo     echo %%h | findstr NEXS ^>^> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
-echo     if %errorlevel%==1 net user %%h %Password% ^>^> C:\UserList.txt  >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo   for /F %%%%h in (UserList.txt) do ( >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo     echo %%%%h | findstr NEXS ^>^> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
+echo     if %%errorlevel%%==1 net user %%%%h %%Password%% ^>^> C:\UserList.txt  >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo   ) >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo ) >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
 echo exit >> C:\DownloadedFiles\Additional_Scripts\Reset_All_Passwords.bat
